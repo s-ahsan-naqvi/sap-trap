@@ -1,0 +1,74 @@
+const c = {
+    memory: {
+        0: 0b0100001,
+        1: 0b0000001,
+        24: 0b000010,
+        99: 0b00000001
+    },
+    setPins: (pins) => {
+        // TODO
+    },
+    bus: {
+        value: 0b0000000,
+        setValue: (value) => {
+            c.bus.value = value;
+            c.mar.execute();
+        }
+    },
+    programCounter: {
+        value: 0b00000000,
+        execute: () => {
+            //return single
+            
+            if(isActive('EP')){
+                c.bus.setValue(c.programCounter.value);
+            }
+        }
+    },
+    mar: {
+        value: 0,
+        execute: () => {
+            
+            if(isActive("L'M")){
+                c.mar.value = c.bus.value;
+            }
+
+            c.ram.execute();
+        }
+    },
+    ram: {
+        value: 0,
+        execute: () => {
+            //return single
+            c.ram.value = c.memory[c.mar.value];
+
+            if(isActive("CE'")){
+                c.bus.setValue(c.ram.value);
+            }
+        }
+    },
+    inputRegister: {
+        value: 0,
+        execute: () => {
+            //return single
+            // c.ram.value = c.memory[c.mar.value];
+            
+            if(isActive("L'I")){
+                c.ram.value = c.bus.value;
+            }
+
+            if(isActive("E'I")){
+                c.bus.setValue(c.inputRegister.value);
+            }
+        }
+    },
+    controlUnit: {
+        value: 0,
+        execute: () => {
+
+            const opcode = c.inputRegister.value; // TODO: split binary
+
+        }
+    }
+
+}

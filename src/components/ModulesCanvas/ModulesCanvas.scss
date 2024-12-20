@@ -1,0 +1,13 @@
+.ModulesCanvas {
+    display: flex;
+    flex: 1;
+    background: linear-gradient(
+        to right,
+        #FF0018, /* Red */
+        #FFA52C, /* Orange */
+        #FFFF41, /* Yellow */
+        #008018, /* Green */
+        #0000F9, /* Blue */
+        #86007D  /* Purple */
+      );
+}
